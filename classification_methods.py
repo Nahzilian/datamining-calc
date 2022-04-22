@@ -67,3 +67,10 @@ def gain(data: DataFrame, class_col, val_col, default=True):
         gain -= entropies[i]
 
     return gain
+
+
+def classification_error(data: DataFrame, pos_class, neg_class, pos_val, neg_val, class_col, val_col):
+    data_error_false = data[(data[class_col] == pos_class) & data[val_col] == neg_val]
+    data_error_true = data[(data[class_col] == neg_class) & data[val_col] == pos_val]
+    return data_error_false.shape[0] + data_error_true.shape[0]
+
